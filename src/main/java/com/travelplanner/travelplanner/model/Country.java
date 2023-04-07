@@ -1,9 +1,6 @@
 package com.travelplanner.travelplanner.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -22,7 +19,9 @@ public class Country {
     //Nazwy pól odpowiadają nazwom z Jsona
     private String name;
 
-//    Map<Stat, Double> stats = new HashMap<>();
+    @ElementCollection()
+    @MapKeyEnumerated(EnumType.STRING)
+    private Map<Stat, Double> stats = new HashMap<>();
 
     public Country(String name) {
         this.name = name;
@@ -33,9 +32,9 @@ public class Country {
 
     }
 
-//    public void addStat(Stat stat, double value) {
-//        stats.put(stat, value);
-//    }
+    public void addStat(Stat stat, double value) {
+        stats.put(stat, value);
+    }
 
     public void setId(long id) {
         this.id = id;

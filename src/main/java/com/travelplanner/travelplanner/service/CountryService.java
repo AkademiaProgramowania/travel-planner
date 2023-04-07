@@ -4,6 +4,8 @@ import com.travelplanner.travelplanner.model.Country;
 import com.travelplanner.travelplanner.repository.CountryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CountryService {
 
@@ -16,6 +18,10 @@ public class CountryService {
     public void createCountry(Country country) {
         countryRepository.save(country);
         System.out.println(country);
+    }
+
+    public List<Country> getCountries() {
+        return countryRepository.findAll();
     }
 
 
