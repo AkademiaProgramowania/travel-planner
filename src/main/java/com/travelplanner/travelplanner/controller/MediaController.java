@@ -4,9 +4,7 @@ import com.travelplanner.travelplanner.model.Country;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.travelplanner.travelplanner.model.Stat;
 
 @RestController
@@ -56,7 +54,6 @@ public class MediaController {
         return createCountry();
     }
 
-
     private Country createCountry() {
         Country country1 = new Country("Poland");
         country1.addStat(Stat.CITIZEN_COUNT, 37_000_000);
@@ -67,5 +64,25 @@ public class MediaController {
         country1.addStat(Stat.WATER_PRICE, 50);
         country1.addStat(Stat.GAS_PRICE, 100);
         return country1;
+    }
+
+    @PostMapping("addCountry")
+    void addCountry(String name, int waterPrice) {
+        System.out.println("Sukces");
+        //Wysyłanie danych przez parametry zapytania.
+        System.out.println(name);
+        System.out.println(waterPrice);
+    }
+
+    @PostMapping("/addCountry2")
+    void addCountry2(@RequestBody Country country) {
+        //Wysyłanie przez ciało zapytania.
+        System.out.println(country);
+    }
+
+    @PostMapping("/countries/{id}")
+    void addCountry3(@PathVariable int id) {
+        //Wysyłanie przez ścieżkę.
+        System.out.println(id);
     }
 }
